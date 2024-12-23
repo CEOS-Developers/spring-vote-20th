@@ -34,4 +34,10 @@ public class Member {
     @Enumerated(EnumType.STRING)
     @Column(length = 50, nullable = false)
     private TeamType team;
+
+    private Boolean voteBack = false;
+
+    private Boolean voteFront = false;
+
+    private Boolean voteTeam = false;
 }
