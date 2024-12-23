@@ -16,7 +16,7 @@ public class Vote {
     @Column(name = "vote_id", nullable = false)
     private Long id;
 
-    private Long count;
+    private int count = 0;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
