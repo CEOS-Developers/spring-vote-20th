@@ -1,7 +1,7 @@
 package ceos.vote.domain.vote.entity;
 
 import ceos.vote.domain.member.entity.Member;
-import ceos.vote.global.BaseEntity;
+import ceos.vote.global.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

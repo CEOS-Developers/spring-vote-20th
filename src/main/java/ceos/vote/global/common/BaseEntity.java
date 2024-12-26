@@ -1,4 +1,4 @@
-package ceos.vote.global;
+package ceos.vote.global.common;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
