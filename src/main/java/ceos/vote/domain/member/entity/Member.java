@@ -36,9 +36,12 @@ public class Member extends BaseEntity {
     @Column(length = 50, nullable = false)
     private TeamType team;
 
+    @Column(name = "vote_back")
     private Boolean voteBack = false;
 
+    @Column(name = "vote_front")
     private Boolean voteFront = false;
 
+    @Column(name = "vote_team")
     private Boolean voteTeam = false;
 }
