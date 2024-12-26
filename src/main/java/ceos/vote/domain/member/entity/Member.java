@@ -3,6 +3,7 @@ package ceos.vote.domain.member.entity;
 import ceos.vote.global.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -40,11 +41,26 @@ public class Member extends BaseEntity {
     private TeamType team;
 
     @Column(name = "vote_back")
-    private Boolean voteBack = false;
+    private Boolean voteBack;
 
     @Column(name = "vote_front")
-    private Boolean voteFront = false;
+    private Boolean voteFront;
 
     @Column(name = "vote_team")
-    private Boolean voteTeam = false;
+    private Boolean voteTeam;
+
+    @Builder
+    public Member(String userId, String password, String email, String role, PartType part, String name, TeamType team, Boolean voteBack, Boolean voteFront, Boolean voteTeam) {
+
+        this.userId = userId;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+        this.part = part;
+        this.name = name;
+        this.team = team;
+        this.voteBack = voteBack;
+        this.voteFront = voteFront;
+        this.voteTeam = voteTeam;
+    }
 }

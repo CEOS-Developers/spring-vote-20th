@@ -27,13 +27,16 @@ public enum ExceptionCode {
     WRONG_TOKEN_EXCEPTION(HttpStatus.UNAUTHORIZED, 3002, "유효하지 않은 토큰입니다."),
     INVALID_REFRESH_TOKEN(HttpStatus.BAD_REQUEST, 3003,"올바르지 않은 형식의 RefreshToken 입니다."),
     INVALID_ACCESS_TOKEN(HttpStatus.BAD_REQUEST, 3004,"올바르지 않은 형식의 AccessToken 입니다."),
-    DUPLICATED_ADMIN_USERNAME(HttpStatus.BAD_REQUEST, 3005,"중복된 사용자 이름입니다."),
+    DUPLICATED_USER_ID(HttpStatus.BAD_REQUEST, 3005,"중복된 사용자 아이디입니다."),
     DUPLICATED_ADMIN_EMAIL(HttpStatus.BAD_REQUEST, 3006,"중복된 사용자 이메일입니다."),
     NOT_FOUND_REFRESH_TOKEN(HttpStatus.NOT_FOUND, 3007,"존재하지 않는 RefreshToken 입니다."),
     EXPIRED_PERIOD_REFRESH_TOKEN(HttpStatus.UNAUTHORIZED, 3008,"기한이 만료된 RefreshToken 입니다."),
     EXPIRED_PERIOD_ACCESS_TOKEN(HttpStatus.UNAUTHORIZED, 3009,"기한이 만료된 AccessToken 입니다."),
     NOT_FOUND_REFRESH_TOKEN_IN_DB(HttpStatus.NOT_FOUND, 3010,"현재 DB에 존재하지 않는 RefreshToken 입니다."),
-    NOT_FOUND_USER(HttpStatus.NOT_FOUND, 3011,"존재하지 않는 사용자입니다.");
+    NOT_FOUND_USER(HttpStatus.NOT_FOUND, 3011,"존재하지 않는 사용자입니다."),
+    INVALID_PART_TYPE(HttpStatus.BAD_REQUEST, 3012,"올바르지 않은 형식의 소속 파트입니다."),
+    INVALID_TEAM_TYPE(HttpStatus.BAD_REQUEST, 3013,"올바르지 않은 형식의 소속 팀명입니다."),
+    FAIL_TO_VALIDATE_TOKEN(HttpStatus.INTERNAL_SERVER_ERROR, 3014, "토큰 유효성 검사 중 오류가 발생했습니다.");
 
     private final HttpStatus httpStatus;
     private final int code;
