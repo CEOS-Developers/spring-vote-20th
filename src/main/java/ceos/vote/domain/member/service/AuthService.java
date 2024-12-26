@@ -159,7 +159,7 @@ public class AuthService {
     @Transactional
     public void deleteAndSaveNewRefreshToken(String userId, String newRefresh, Long expiredMs) {
 
-        refreshRepository.deleteByRefresh(newRefresh);
+        refreshRepository.deleteByUserId(userId);
 
         addRefreshEntity(userId, newRefresh, expiredMs);
     }
