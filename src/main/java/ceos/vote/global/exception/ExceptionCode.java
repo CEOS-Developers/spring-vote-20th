@@ -20,6 +20,11 @@ public enum ExceptionCode {
     ALREADY_EXIST_EXCEPTION(HttpStatus.BAD_REQUEST, 2006, "이미 존재하는 리소스입니다."),
     INVALID_SORT_EXCEPTION(HttpStatus.BAD_REQUEST, 2007, "올바르지 않은 정렬 값입니다."),
     BAD_REQUEST_ERROR(HttpStatus.BAD_REQUEST, 2008, "잘못된 요청입니다."),
+    BAD_REQUEST_TEAM(HttpStatus.BAD_REQUEST, 2009, "같은 팀에게 투표할 수 없습니다."),
+    ALREADY_VOTE_TEAM(HttpStatus.BAD_REQUEST, 2010, "이미 다른 팀에게 투표했습니다."),
+    BAD_REQUEST_DEVELOPER(HttpStatus.BAD_REQUEST, 2011, "같은 파트에게만 투표할 수 있습니다."),
+    ALREADY_VOTE_DEVELOPER(HttpStatus.BAD_REQUEST, 2012, "이미 다른 개발자에게 투표했습니다."),
+    BAD_REQUEST_SELF(HttpStatus.BAD_REQUEST, 2013, "나 자신에게 투표할 수 없습니다."),
 
     // 3000: Auth Error
     KAKAO_TOKEN_EXCEPTION(HttpStatus.INTERNAL_SERVER_ERROR, 3000, "토큰 발급에서 오류가 발생했습니다."),
