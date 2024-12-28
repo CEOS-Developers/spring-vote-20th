@@ -6,10 +6,12 @@ import ceos.vote.domain.member.entity.Member;
 import ceos.vote.domain.member.entity.PartType;
 import ceos.vote.domain.member.entity.Refresh;
 import ceos.vote.domain.member.entity.TeamType;
+import ceos.vote.domain.team.entity.Team;
 import ceos.vote.global.exception.ApplicationException;
 import ceos.vote.global.jwt.JWTUtil;
 import ceos.vote.global.repository.MemberRepository;
 import ceos.vote.global.repository.RefreshRepository;
+import ceos.vote.global.repository.TeamRepository;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -32,6 +34,7 @@ public class AuthService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final JWTUtil jwtUtil;
     private final RefreshRepository refreshRepository;
+    private final TeamRepository teamRepository;
 
     // [POST] 회원가입
     @Transactional
@@ -69,7 +72,8 @@ public class AuthService {
             throw new ApplicationException(INVALID_TEAM_TYPE);
         }
 
-        Member newMember = request.toEntity(bCryptPasswordEncoder.encode(password), part, team);
+        Team myTeam = teamRepository.findByType(team);
+        Member newMember = request.toEntity(bCryptPasswordEncoder.encode(password), part, myTeam);
 
         memberRepository.save(newMember);
 
