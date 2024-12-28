@@ -3,6 +3,7 @@ package ceos.vote.domain.member.dto.request;
 import ceos.vote.domain.member.entity.Member;
 import ceos.vote.domain.member.entity.PartType;
 import ceos.vote.domain.member.entity.TeamType;
+import ceos.vote.domain.team.entity.Team;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -35,7 +36,7 @@ public record SignupRequestDto(
         @NotNull(message = "소속 파트는 필수 입력 사항입니다.")
         String part
 ) {
-    public Member toEntity(String encodedPassword, PartType part, TeamType team) {
+    public Member toEntity(String encodedPassword, PartType part, Team team) {
         return Member.builder()
                 .userId(userId)
                 .password(encodedPassword)
@@ -44,9 +45,6 @@ public record SignupRequestDto(
                 .part(part)
                 .name(name)
                 .team(team)
-                .voteBack(false)
-                .voteFront(false)
-                .voteTeam(false)
                 .build();
     }
 }
