@@ -50,12 +50,6 @@ public class Member extends BaseEntity {
     @Column(name = "vote_team", nullable = false)
     private boolean voteTeam = false;
 
-    private int count = 0;
-
-    public void voteToMe() {
-        this.count++;
-    }
-
     public void voteToBack() {
         this.voteBack = true;
     }

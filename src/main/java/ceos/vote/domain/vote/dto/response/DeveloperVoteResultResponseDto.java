@@ -1,17 +1,17 @@
 package ceos.vote.domain.vote.dto.response;
 
-import ceos.vote.domain.member.entity.Member;
+import ceos.vote.domain.developer.entity.Developer;
 import lombok.Builder;
 
 @Builder
 public record DeveloperVoteResultResponseDto(
-        String memberName,
+        String developerName,
         int count
 ) {
-    public static DeveloperVoteResultResponseDto from(Member m) {
+    public static DeveloperVoteResultResponseDto from(Developer developer) {
         return DeveloperVoteResultResponseDto.builder()
-                .memberName(m.getName())
-                .count(m.getCount())
+                .developerName(developer.getDeveloperName())
+                .count(developer.getCount())
                 .build();
     }
 }
