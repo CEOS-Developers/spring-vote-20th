@@ -22,9 +22,9 @@ public record MemberResponseDto (
                 .email(member.getEmail())
                 .team(member.getTeam().getDescription())
                 .part(member.getPart().getDescription())
-                .voteBack(member.getVoteBack())
-                .voteFront(member.getVoteFront())
-                .voteTeam(member.getVoteTeam())
+                .voteBack(member.isVoteBack())
+                .voteFront(member.isVoteFront())
+                .voteTeam(member.isVoteTeam())
                 .build();
     }
 }

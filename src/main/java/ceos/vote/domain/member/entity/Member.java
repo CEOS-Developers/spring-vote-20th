@@ -1,5 +1,6 @@
 package ceos.vote.domain.member.entity;
 
+import ceos.vote.domain.team.entity.Team;
 import ceos.vote.global.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -36,21 +37,39 @@ public class Member extends BaseEntity {
     @Column(length = 20, nullable = false)
     private String name;
 
-    @Enumerated(EnumType.STRING)
-    @Column(length = 50, nullable = false)
-    private TeamType team;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "team_id")
+    private Team team;
 
-    @Column(name = "vote_back")
-    private Boolean voteBack;
+    @Column(name = "vote_back", nullable = false)
+    private boolean voteBack = false;
 
-    @Column(name = "vote_front")
-    private Boolean voteFront;
+    @Column(name = "vote_front", nullable = false)
+    private boolean voteFront = false;
 
-    @Column(name = "vote_team")
-    private Boolean voteTeam;
+    @Column(name = "vote_team", nullable = false)
+    private boolean voteTeam = false;
+
+    private int count = 0;
+
+    public void voteToMe() {
+        this.count++;
+    }
+
+    public void voteToBack() {
+        this.voteBack = true;
+    }
+
+    public void voteToFront() {
+        this.voteFront = true;
+    }
+
+    public void voteToTeam() {
+        this.voteTeam = true;
+    }
 
     @Builder
-    public Member(String userId, String password, String email, String role, PartType part, String name, TeamType team, Boolean voteBack, Boolean voteFront, Boolean voteTeam) {
+    public Member(String userId, String password, String email, String role, PartType part, String name, Team team) {
 
         this.userId = userId;
         this.password = password;
@@ -59,8 +78,5 @@ public class Member extends BaseEntity {
         this.part = part;
         this.name = name;
         this.team = team;
-        this.voteBack = voteBack;
-        this.voteFront = voteFront;
-        this.voteTeam = voteTeam;
     }
 }
