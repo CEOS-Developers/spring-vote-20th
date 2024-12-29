@@ -7,7 +7,7 @@ ARG JAR_FILE=/build/libs/*.jar
 COPY ${JAR_FILE} app.jar
 
 # 4. 환경 변수로 Spring Profile 설정 (기본값: local)
-ENV SPRING_PROFILES_ACTIVE=dev
+ENV SPRING_PROFILES_ACTIVE=prod
 
 # 5. 애플리케이션 실행
 ENTRYPOINT ["java", "-Dspring.profiles.active=${SPRING_PROFILES_ACTIVE}", "-jar", "app.jar"]
