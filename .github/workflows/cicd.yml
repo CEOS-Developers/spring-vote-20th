@@ -43,7 +43,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build Docker (create Docker image)
-        run: docker build --platform linux/amd64 -t ${{ secrets.DOCKERHUB_USERNAME }}/ceos_vote .
+        run: docker build --platform linux/amd64 -t ${{ secrets.DOCKERHUB_USERNAME }}/ceos_vote:latest .
       - name: Push Docker
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/ceos_vote:latest
         
@@ -58,7 +58,11 @@ jobs:
           host: ${{ secrets.VOTE_SERVER_IP }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/ceos_vote
-            sudo docker ps -q --filter "name=ceos_vote" | grep -q . && sudo docker stop ceos_vote && sudo docker rm ceos_vote || true
-            sudo docker run -d -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/ceos_vote
+            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/ceos_vote:latest
+            if [ $(sudo docker ps -q --filter "name=ceos_vote") ]; then
+              echo "Stopping and removing existing container..."
+              sudo docker stop ceos_vote
+              sudo docker rm ceos_vote
+            fi
+            sudo docker run -d -p 8080:8080 ${{ secrets.DOCKERHUB_USERNAME }}/ceos_vote:latest
     
