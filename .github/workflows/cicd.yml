@@ -58,7 +58,7 @@ jobs:
           host: ${{ secrets.VOTE_SERVER_IP }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/ceos_vote:latest
+            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/ceos_vote
             sudo docker ps -q --filter "name=ceos_vote" | grep -q . && sudo docker stop ceos_vote && sudo docker rm ceos_vote || true
-            sudo docker run -d -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/ceos_vote:latest
+            sudo docker run -d -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/ceos_vote
     
