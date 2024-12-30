@@ -14,7 +14,7 @@ public record DeveloperListResponseDto(
         return DeveloperListResponseDto.builder()
                 .developerId(developer.getId())
                 .developerName(developer.getDeveloperName())
-                .teamName(developer.getTeam().getDescription())
+                .teamName(developer.getTeam().getTeamName())
                 .build();
     }
 }
