@@ -37,4 +37,10 @@ public class Member extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private Team team;
 
+    @Builder.Default
+    private Integer voteNum = 0;
+
+    public void increaseVoteNum() {
+        voteNum++;
+    }
 }

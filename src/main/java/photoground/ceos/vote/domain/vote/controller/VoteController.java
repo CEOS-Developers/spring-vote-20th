@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import photoground.ceos.vote.domain.member.entity.Part;
 import photoground.ceos.vote.domain.vote.dto.LeaderListDTO;
+import photoground.ceos.vote.domain.vote.dto.LeaderResultListDTO;
 import photoground.ceos.vote.domain.vote.dto.TeamListDTO;
 import photoground.ceos.vote.domain.vote.dto.VoteLeaderDTO;
+import photoground.ceos.vote.domain.vote.dto.VoteTeamDTO;
 import photoground.ceos.vote.domain.vote.service.VoteService;
 
 @RestController
@@ -25,29 +27,48 @@ public class VoteController {
 
     //파트장 후보 조회
     @GetMapping("/leader")
-    public ResponseEntity<LeaderListDTO> showCandidates(@RequestParam Part part){
+    public ResponseEntity<LeaderListDTO> showCandidates(@RequestParam Part part) {
 
-        LeaderListDTO candidates=voteService.showLeaders(part);
+        LeaderListDTO candidates = voteService.showLeaders(part);
         return ResponseEntity.ok(candidates);
     }
 
     //팀 후보 조회
     @GetMapping("/team")
-    public ResponseEntity<TeamListDTO> showCandidates(){
+    public ResponseEntity<TeamListDTO> showCandidates() {
 
-        TeamListDTO candidates=voteService.showTeams();
+        TeamListDTO candidates = voteService.showTeams();
         return ResponseEntity.ok(candidates);
     }
 
     //파트장 투표
-    @PostMapping //로그인 구현 후 수정
-    public ResponseEntity<Map<String, String>> vote(@RequestBody VoteLeaderDTO voteDTO, @RequestParam Long voterId){
+    @PostMapping("/leader") //로그인 구현 후 수정
+    public ResponseEntity<Map<String, String>> LeaderVote(@RequestBody VoteLeaderDTO voteDTO,
+                                                          @RequestParam Long voterId) {
 
-        voteService.vote(voteDTO, voterId);
+        voteService.voteLeader(voteDTO, voterId);
 
         Map<String, String> response = new HashMap<>();
-        response.put("message", "투표가 완료되었습니다.");
+        response.put("message", "파트장 투표가 완료되었습니다.");
         return ResponseEntity.ok(response);
     }
 
+    //팀 투표
+    @PostMapping("/team")
+    public ResponseEntity<Map<String, String>> TeamVote(@RequestBody VoteTeamDTO voteDTO, @RequestParam Long voterId) {
+
+        voteService.voteTeam(voteDTO, voterId);
+
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "데모데이 투표가 완료되었습니다.");
+        return ResponseEntity.ok(response);
+    }
+
+    //파트장 투표 결과 조회
+    @GetMapping("/leader/result")
+    public ResponseEntity<LeaderResultListDTO> getLeaderResult(@RequestParam Part part) {
+
+        LeaderResultListDTO result = voteService.getLeaderResult(part);
+        return ResponseEntity.ok(result);
+    }
 }
