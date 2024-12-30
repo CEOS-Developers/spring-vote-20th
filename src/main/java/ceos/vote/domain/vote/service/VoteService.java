@@ -1,5 +1,6 @@
 package ceos.vote.domain.vote.service;
 
+import ceos.vote.domain.developer.entity.Developer;
 import ceos.vote.domain.member.entity.Member;
 import ceos.vote.domain.member.entity.PartType;
 import ceos.vote.domain.team.entity.Team;
@@ -8,6 +9,7 @@ import ceos.vote.domain.vote.dto.response.TeamListResponseDto;
 import ceos.vote.domain.vote.dto.response.DeveloperVoteResultResponseDto;
 import ceos.vote.domain.vote.dto.response.TeamVoteResultResponseDto;
 import ceos.vote.global.exception.ApplicationException;
+import ceos.vote.global.repository.DeveloperRepository;
 import ceos.vote.global.repository.MemberRepository;
 import ceos.vote.global.repository.TeamRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static ceos.vote.global.exception.ExceptionCode.*;
@@ -24,16 +27,17 @@ import static ceos.vote.global.exception.ExceptionCode.*;
 @RequiredArgsConstructor
 public class VoteService {
 
-    private final MemberRepository memberRepository;
     private final TeamRepository teamRepository;
+    private final MemberRepository memberRepository;
+    private final DeveloperRepository developerRepository;
 
     // [GET] 개발자 리스트 조회
     public List<DeveloperListResponseDto> getDeveloperList(String type) {
 
         PartType partType = PartType.valueOf(type.toUpperCase());
-        List<Member> members = memberRepository.findByPartOrderByCountDesc(partType);
+        List<Developer> developers = developerRepository.findByPartOrderByCountDesc(partType);
 
-        return members.stream()
+        return developers.stream()
                 .map(DeveloperListResponseDto::from)
                 .collect(Collectors.toList());
     }
@@ -48,20 +52,20 @@ public class VoteService {
 
     }
 
-    // [PATCH] 개발자 파트장 투표
+    // [POST] 개발자 파트장 투표
     @Transactional
-    public void voteDeveloper(Long memberId, Member loginMember) {
+    public void voteDeveloper(Long developerId, Member loginMember) {
 
-        Member member = memberRepository.findById(memberId)
+        Developer developer = developerRepository.findById(developerId)
                 .orElseThrow(() -> new ApplicationException(NOT_FOUND_USER));
         // 나 자신에게 투표할 수 없음
-        if (member == loginMember)
+        if (Objects.equals(developer.getDeveloperName(), loginMember.getName()))
             throw new ApplicationException(BAD_REQUEST_SELF);
         // 같은 파트에게만 투표할 수 있음
-        if (member.getPart() != loginMember.getPart())
+        if (developer.getPart() != loginMember.getPart())
             throw new ApplicationException(BAD_REQUEST_DEVELOPER);
         // 이미 투표했다면 다시 투표할 수 없음
-        PartType type = member.getPart();
+        PartType type = developer.getPart();
         if (type.equals(PartType.BACKEND)) {
             if (loginMember.isVoteBack())
                 throw new ApplicationException(ALREADY_VOTE_DEVELOPER);
@@ -72,12 +76,12 @@ public class VoteService {
                 throw new ApplicationException(ALREADY_VOTE_DEVELOPER);
             loginMember.voteToFront();
         }
-        member.voteToMe();
-        memberRepository.save(member);
+        developer.voteToMe();
+        developerRepository.save(developer);
         memberRepository.save(loginMember);
     }
 
-    // [PATCH] 팀 투표
+    // [POST] 팀 투표
     @Transactional
     public void voteTeam(Long teamId, Member loginMember) {
 
@@ -99,9 +103,9 @@ public class VoteService {
     // [GET] 개발자 파트장 투표 결과 조회
     public List<DeveloperVoteResultResponseDto> getDeveloperVoteResult(String type) {
         PartType partType = PartType.valueOf(type.toUpperCase());
-        List<Member> members = memberRepository.findByPartOrderByCountDesc(partType);
+        List<Developer> developers = developerRepository.findByPartOrderByCountDesc(partType);
 
-        return members.stream()
+        return developers.stream()
                 .map(DeveloperVoteResultResponseDto::from)
                 .collect(Collectors.toList());
     }

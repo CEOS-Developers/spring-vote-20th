@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/vote")
+@RequestMapping("/api/vote")
 @RequiredArgsConstructor
 @Tag(name = "Vote", description = "투표 관련 API")
 public class VoteController {
