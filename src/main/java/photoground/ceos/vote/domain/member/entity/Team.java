@@ -1,8 +1,10 @@
 package photoground.ceos.vote.domain.member.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 @AllArgsConstructor
+@Getter
 public enum Team {
     PHOTO_GROUND("포토그라운드"),
     ANGEL_BRIDGE("엔젤브릿지"),

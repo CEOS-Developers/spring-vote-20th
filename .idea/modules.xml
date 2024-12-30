@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/spring-vote-20th.iml" filepath="$PROJECT_DIR$/.idea/spring-vote-20th.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/photoground.ceos.vote.main.iml" filepath="$PROJECT_DIR$/.idea/modules/photoground.ceos.vote.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/vote.main.iml" filepath="$PROJECT_DIR$/.idea/modules/vote.main.iml" />
     </modules>
   </component>
