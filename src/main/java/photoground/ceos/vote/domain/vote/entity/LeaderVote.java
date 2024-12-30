@@ -20,4 +20,8 @@ public class LeaderVote extends Vote {
     @JoinColumn(name = "candidate_id")
     private Member candidate;
 
+    public LeaderVote(Member candidate, Member voter){
+        this.candidate = candidate;
+        this.voter=voter;
+    }
 }
