@@ -14,6 +14,7 @@ import photoground.ceos.vote.domain.member.entity.Part;
 import photoground.ceos.vote.domain.vote.dto.LeaderListDTO;
 import photoground.ceos.vote.domain.vote.dto.LeaderResultListDTO;
 import photoground.ceos.vote.domain.vote.dto.TeamListDTO;
+import photoground.ceos.vote.domain.vote.dto.TeamResultListDTO;
 import photoground.ceos.vote.domain.vote.dto.VoteLeaderDTO;
 import photoground.ceos.vote.domain.vote.dto.VoteTeamDTO;
 import photoground.ceos.vote.domain.vote.service.VoteService;
@@ -69,6 +70,14 @@ public class VoteController {
     public ResponseEntity<LeaderResultListDTO> getLeaderResult(@RequestParam Part part) {
 
         LeaderResultListDTO result = voteService.getLeaderResult(part);
+        return ResponseEntity.ok(result);
+    }
+
+    //팀 투표 결과 조회
+    @GetMapping("/team/result")
+    public ResponseEntity<TeamResultListDTO> getTeamResult() {
+
+        TeamResultListDTO result = voteService.getTeamResult();
         return ResponseEntity.ok(result);
     }
 }

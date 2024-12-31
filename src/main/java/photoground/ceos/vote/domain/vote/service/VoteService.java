@@ -1,7 +1,9 @@
 package photoground.ceos.vote.domain.vote.service;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +16,8 @@ import photoground.ceos.vote.domain.vote.dto.LeaderListDTO;
 import photoground.ceos.vote.domain.vote.dto.LeaderResultDTO;
 import photoground.ceos.vote.domain.vote.dto.LeaderResultListDTO;
 import photoground.ceos.vote.domain.vote.dto.TeamListDTO;
+import photoground.ceos.vote.domain.vote.dto.TeamResultDTO;
+import photoground.ceos.vote.domain.vote.dto.TeamResultListDTO;
 import photoground.ceos.vote.domain.vote.dto.VoteLeaderDTO;
 import photoground.ceos.vote.domain.vote.dto.VoteTeamDTO;
 import photoground.ceos.vote.domain.vote.entity.LeaderVote;
@@ -120,6 +124,25 @@ public class VoteService {
     }
 
 
+    //팀 투표 결과 조회
+    public TeamResultListDTO getTeamResult() {
+
+        Map<Team, Integer> res = new HashMap<>();
+        for (Team team : Team.values()) {
+            res.put(team, 0);
+        }
+
+        List<TeamVote> teamVotes = voteRepository.findAllTeamVotes();
+        teamVotes.forEach(vote
+                -> res.put(vote.getTeam(), res.get(vote.getTeam()) + 1));
+
+        List<TeamResultDTO> dto = TeamResultDTO.from(res);
+        return TeamResultListDTO.from(dto);
+
+
+    }
+
+
     //중복 투표 체크 (파트장)
     private boolean duplicateLeaderVote(Long voterId) {
         LeaderVote vote = voteRepository.findLeaderVoteByVoter_Id(voterId);
@@ -147,10 +170,8 @@ public class VoteService {
 
     //내 팀 아닌지 체크
     private boolean validTeam(Team team, Member voter) {
-
         return team != voter.getTeam();
     }
-
 
 }
 
