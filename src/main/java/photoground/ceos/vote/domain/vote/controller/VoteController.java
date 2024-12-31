@@ -4,12 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import photoground.ceos.vote.domain.member.dto.CustomUserDetails;
 import photoground.ceos.vote.domain.member.entity.Part;
 import photoground.ceos.vote.domain.vote.dto.LeaderListDTO;
 import photoground.ceos.vote.domain.vote.dto.LeaderResultListDTO;
@@ -45,9 +47,10 @@ public class VoteController {
     //파트장 투표
     @PostMapping("/leader") //로그인 구현 후 수정
     public ResponseEntity<Map<String, String>> LeaderVote(@RequestBody VoteLeaderDTO voteDTO,
-                                                          @RequestParam Long voterId) {
+                                                          @AuthenticationPrincipal CustomUserDetails customUserDetails) {
 
-        voteService.voteLeader(voteDTO, voterId);
+        Long userId = customUserDetails.getMemberId();
+        voteService.voteLeader(voteDTO, userId);
 
         Map<String, String> response = new HashMap<>();
         response.put("message", "파트장 투표가 완료되었습니다.");
@@ -56,8 +59,10 @@ public class VoteController {
 
     //팀 투표
     @PostMapping("/team")
-    public ResponseEntity<Map<String, String>> TeamVote(@RequestBody VoteTeamDTO voteDTO, @RequestParam Long voterId) {
+    public ResponseEntity<Map<String, String>> TeamVote(@RequestBody VoteTeamDTO voteDTO,
+                                                        @AuthenticationPrincipal CustomUserDetails customUserDetails) {
 
+        Long voterId = customUserDetails.getMemberId();
         voteService.voteTeam(voteDTO, voterId);
 
         Map<String, String> response = new HashMap<>();

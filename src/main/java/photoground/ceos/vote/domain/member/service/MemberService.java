@@ -41,16 +41,19 @@ public class MemberService {
         memberRepository.save(member);
     }
 
-    public List<Member> findByPart(Part part){
+    public List<Member> findByPart(Part part) {
 
         return memberRepository.findByPart(part);
     }
 
     public Member findById(Long candidateId) {
-        return memberRepository.findById(candidateId).orElseThrow(()-> new CustomException(ErrorCode.NOT_FOUND_MEMBER));
+        return memberRepository.findById(candidateId)
+                .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_MEMBER));
     }
 
     public boolean existsById(Long candidateId) {
         return memberRepository.existsById(candidateId);
     }
+
+
 }
