@@ -26,7 +26,7 @@ public class Member extends BaseTimeEntity {
     @Column(name = "member_id")
     private Long id;
 
-    private Long username;
+    private String username;
     private String password;
     private String email;
     private String name;
@@ -37,4 +37,10 @@ public class Member extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private Team team;
 
+    @Builder.Default
+    private Integer voteNum = 0;
+
+    public void increaseVoteNum() {
+        voteNum++;
+    }
 }

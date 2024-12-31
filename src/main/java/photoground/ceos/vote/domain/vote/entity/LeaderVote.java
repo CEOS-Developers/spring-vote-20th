@@ -17,7 +17,11 @@ import photoground.ceos.vote.domain.member.entity.Member;
 public class LeaderVote extends Vote {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "candidate_id")
-    private Member candidate;
+    @JoinColumn(name = "leader_id")
+    private Member leader;
 
+    public LeaderVote(Member leader, Member voter) {
+        this.leader = leader;
+        this.voter = voter;
+    }
 }
