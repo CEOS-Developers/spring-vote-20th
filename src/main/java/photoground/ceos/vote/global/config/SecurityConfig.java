@@ -16,6 +16,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
+import photoground.ceos.vote.domain.member.repository.MemberRepository;
 import photoground.ceos.vote.global.entity.RefreshRepository;
 import photoground.ceos.vote.global.jwt.CustomLogoutFilter;
 import photoground.ceos.vote.global.jwt.JWTFilter;
@@ -30,6 +31,7 @@ public class SecurityConfig {
     private final AuthenticationConfiguration authenticationConfiguration;
     private final JWTUtil jwtUtil;
     private final RefreshRepository refreshRepository;
+    private final MemberRepository memberRepository;
 
     //AuthenticationManager Bean 등록
     @Bean
@@ -43,7 +45,6 @@ public class SecurityConfig {
 
         return new BCryptPasswordEncoder();
     }
-
 
 
     @Bean
@@ -84,10 +85,11 @@ public class SecurityConfig {
                 .anyRequest().authenticated()); // 이외의 남은 경로는 로그인한 사용자만 접근 가능
 
         // JWT 권한 검증
-        http.addFilterAfter(new JWTFilter(jwtUtil), LoginFilter.class);
+        http.addFilterAfter(new JWTFilter(jwtUtil, memberRepository), LoginFilter.class);
 
         // 로그인 필터 설정 (/login)
-        http.addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil, refreshRepository),
+        http.addFilterAt(
+                new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil, refreshRepository),
                 UsernamePasswordAuthenticationFilter.class);
 
         // 로그아웃 필터 설정 (/logout)
