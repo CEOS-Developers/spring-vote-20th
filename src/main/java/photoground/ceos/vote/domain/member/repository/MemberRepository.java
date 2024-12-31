@@ -7,4 +7,8 @@ import photoground.ceos.vote.domain.member.entity.Part;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
     List<Member> findByPart(Part part);
+
+    boolean existsByUsername(String username);
+
+    Member findByUsername(String username);
 }
