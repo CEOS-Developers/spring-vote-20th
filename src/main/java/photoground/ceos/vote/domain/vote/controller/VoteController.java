@@ -45,7 +45,7 @@ public class VoteController {
     }
 
     //파트장 투표
-    @PostMapping("/leader") //로그인 구현 후 수정
+    @PostMapping("/leader")
     public ResponseEntity<Map<String, String>> LeaderVote(@RequestBody VoteLeaderDTO voteDTO,
                                                           @AuthenticationPrincipal CustomUserDetails customUserDetails) {
 
