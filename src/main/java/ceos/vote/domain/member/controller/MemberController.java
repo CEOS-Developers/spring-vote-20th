@@ -2,7 +2,9 @@ package ceos.vote.domain.member.controller;
 
 import ceos.vote.domain.member.dto.CustomUserDetails;
 import ceos.vote.domain.member.dto.response.MemberResponseDto;
+import ceos.vote.domain.member.entity.Member;
 import ceos.vote.domain.member.service.MemberService;
+import ceos.vote.global.annotation.Login;
 import ceos.vote.global.common.response.CommonResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -22,10 +24,8 @@ public class MemberController {
 
     @Operation(summary = "회원 기본 정보 조회", description = "회원의 기본 정보를 조회하는 API")
     @GetMapping
-    public CommonResponse<MemberResponseDto> getMemberInfo(@AuthenticationPrincipal CustomUserDetails userDetails) {
+    public CommonResponse<MemberResponseDto> getMemberInfo(@Login Member loginMember) {
 
-        Long memberId = userDetails.getMemberId();
-
-        return new CommonResponse<>(memberService.getMemberInfo(memberId), "회원 기본 정보 조회를 성공하였습니다.");
+        return new CommonResponse<>(memberService.getMemberInfo(loginMember), "회원 기본 정보 조회를 성공하였습니다.");
     }
 }

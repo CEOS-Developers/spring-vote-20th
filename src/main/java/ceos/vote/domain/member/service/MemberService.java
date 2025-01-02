@@ -22,10 +22,8 @@ public class MemberService {
     }
 
     // [GET] 회원 기본 정보 조회
-    public MemberResponseDto getMemberInfo(Long memberId) {
+    public MemberResponseDto getMemberInfo(Member loginMember) {
 
-        Member member = findMemberById(memberId);
-
-        return MemberResponseDto.from(member);
+        return MemberResponseDto.from(loginMember);
     }
 }
