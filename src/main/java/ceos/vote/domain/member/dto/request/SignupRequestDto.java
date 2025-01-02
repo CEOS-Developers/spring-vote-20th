@@ -5,10 +5,7 @@ import ceos.vote.domain.member.entity.PartType;
 import ceos.vote.domain.member.entity.TeamType;
 import ceos.vote.domain.team.entity.Team;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
 
 public record SignupRequestDto(
 
@@ -24,10 +21,6 @@ public record SignupRequestDto(
         @NotNull(message = "비밀번호는 필수 입력 사항입니다.")
         String password,
 
-        @Schema(description = "이메일", example = "ceos@gmail.com")
-        @Email(message = "유효한 이메일 주소를 입력해주세요.")
-        String email,
-
         @Schema(description = "소속 팀명", example = "포토그라운드 | 엔젤브릿지 | 페달지니 | 케이크웨이 | 커피딜")
         @NotNull(message = "소속 팀명은 필수 입력 사항입니다.")
         String team,
@@ -40,7 +33,6 @@ public record SignupRequestDto(
         return Member.builder()
                 .userId(userId)
                 .password(encodedPassword)
-                .email(email)
                 .role("ROLE_USER")
                 .part(part)
                 .name(name)

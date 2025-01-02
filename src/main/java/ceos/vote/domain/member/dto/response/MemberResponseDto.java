@@ -8,7 +8,6 @@ public record MemberResponseDto (
 
         String userId,
         String name,
-        String email,
         String team,
         String part,
         Boolean voteBack,
@@ -19,7 +18,6 @@ public record MemberResponseDto (
         return MemberResponseDto.builder()
                 .userId(member.getUserId())
                 .name(member.getName())
-                .email(member.getEmail())
                 .team(member.getTeam().getDescription())
                 .part(member.getPart().getDescription())
                 .voteBack(member.isVoteBack())

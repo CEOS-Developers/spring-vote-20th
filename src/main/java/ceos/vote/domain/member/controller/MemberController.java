@@ -2,7 +2,9 @@ package ceos.vote.domain.member.controller;
 
 import ceos.vote.domain.member.dto.CustomUserDetails;
 import ceos.vote.domain.member.dto.response.MemberResponseDto;
+import ceos.vote.domain.member.entity.Member;
 import ceos.vote.domain.member.service.MemberService;
+import ceos.vote.global.annotation.Login;
 import ceos.vote.global.common.response.CommonResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
