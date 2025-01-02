@@ -24,8 +24,10 @@ public class MemberController {
 
     @Operation(summary = "회원 기본 정보 조회", description = "회원의 기본 정보를 조회하는 API")
     @GetMapping
-    public CommonResponse<MemberResponseDto> getMemberInfo(@Login Member loginMember) {
+    public CommonResponse<MemberResponseDto> getMemberInfo(@AuthenticationPrincipal CustomUserDetails userDetails) {
 
-        return new CommonResponse<>(memberService.getMemberInfo(loginMember), "회원 기본 정보 조회를 성공하였습니다.");
+        Long memberId = userDetails.getMemberId();
+
+        return new CommonResponse<>(memberService.getMemberInfo(memberId), "회원 기본 정보 조회를 성공하였습니다.");
     }
 }
