@@ -14,6 +14,9 @@ public enum ErrorCode {
     TOKEN_EXPIRED(HttpStatus.UNAUTHORIZED, "토큰이 만료되었습니다."),
     FAIL_AUTHORIZATION(HttpStatus.FORBIDDEN, "권한이 없는 요청입니다."),
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "INTERNAL SERVER ERROR"),
+    DUPLICATE_USERNAME(HttpStatus.BAD_REQUEST, "이미 존재하는 아이디입니다."),
+    DUPLICATE_EMAIL(HttpStatus.BAD_REQUEST, "이미 존재하는 이메일입니다."),
+    INVALID_PASSWORD(HttpStatus.BAD_REQUEST, "비밀번호는 반드시 필요합니다."),
 
     // Vote
     LEADER_VOTE_ALREADY_EXIST(HttpStatus.BAD_REQUEST, "이미 투표하셨습니다."),
