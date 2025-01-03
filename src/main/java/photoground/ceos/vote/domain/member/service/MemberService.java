@@ -23,15 +23,23 @@ public class MemberService {
 
         String username = joinDTO.getUsername();
         String password = joinDTO.getPassword();
+        String email = joinDTO.getEmail();
 
-        boolean isExist = memberRepository.existsByUsername(username);
-
-        if (password == null) {
-            throw new IllegalArgumentException("Password cannot be null");
+        // Username 중복 확인
+        boolean isUsernameExist = memberRepository.existsByUsername(username);
+        if (isUsernameExist) {
+            throw new CustomException(ErrorCode.DUPLICATE_USERNAME);
         }
 
-        if (isExist) {
-            throw new IllegalStateException("Username already exists");
+        // Email 중복 확인
+        boolean isEmailExist = memberRepository.existsByEmail(email);
+        if (isEmailExist) {
+            throw new CustomException(ErrorCode.DUPLICATE_EMAIL);
+        }
+
+        // 비밀번호 null 확인
+        if (password == null) {
+            throw new CustomException(ErrorCode.INVALID_PASSWORD);
         }
 
         // 기본 유저 권한은 USER로 설정
