@@ -1,13 +1,11 @@
 package photoground.ceos.vote.domain.member.service;
 
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import photoground.ceos.vote.domain.member.dto.JoinRequestDto;
 import photoground.ceos.vote.domain.member.entity.Member;
-import photoground.ceos.vote.domain.member.entity.Part;
 import photoground.ceos.vote.domain.member.entity.UserRole;
 import photoground.ceos.vote.domain.member.repository.MemberRepository;
 import photoground.ceos.vote.global.exception.CustomException;
@@ -41,18 +39,10 @@ public class MemberService {
         memberRepository.save(member);
     }
 
-    public List<Member> findByPart(Part part) {
-
-        return memberRepository.findByPart(part);
-    }
 
     public Member findById(Long candidateId) {
         return memberRepository.findById(candidateId)
                 .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_MEMBER));
-    }
-
-    public boolean existsById(Long candidateId) {
-        return memberRepository.existsById(candidateId);
     }
 
 

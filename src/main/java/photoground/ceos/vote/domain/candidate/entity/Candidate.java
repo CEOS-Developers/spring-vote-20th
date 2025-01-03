@@ -1,4 +1,4 @@
-package photoground.ceos.vote.domain.member.entity;
+package photoground.ceos.vote.domain.candidate.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,6 +12,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import photoground.ceos.vote.domain.member.entity.Part;
+import photoground.ceos.vote.domain.member.entity.Team;
 import photoground.ceos.vote.global.entity.BaseTimeEntity;
 
 @Entity
@@ -19,25 +21,27 @@ import photoground.ceos.vote.global.entity.BaseTimeEntity;
 @Getter
 @Builder
 @AllArgsConstructor
-public class Member extends BaseTimeEntity {
+public class Candidate extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "member_id")
+    @Column(name = "candidate_id")
     private Long id;
 
-    private String username;
-    private String password;
-    private String email;
     private String name;
 
-    @Enumerated(EnumType.STRING)
-    private UserRole role;
+    @Builder.Default
+    private Integer voteNum = 0;
 
     @Enumerated(EnumType.STRING)
     private Part part;
 
     @Enumerated(EnumType.STRING)
     private Team team;
+
     
+    public void increaseVoteNum() {
+        voteNum++;
+    }
+
 }

@@ -8,6 +8,7 @@ import jakarta.persistence.ManyToOne;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import photoground.ceos.vote.domain.candidate.entity.Candidate;
 import photoground.ceos.vote.domain.member.entity.Member;
 
 @Entity
@@ -18,9 +19,9 @@ public class LeaderVote extends Vote {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "leader_id")
-    private Member leader;
+    private Candidate leader;
 
-    public LeaderVote(Member leader, Member voter) {
+    public LeaderVote(Candidate leader, Member voter) {
         this.leader = leader;
         this.voter = voter;
     }
