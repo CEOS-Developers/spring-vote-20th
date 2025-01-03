@@ -23,7 +23,10 @@ public enum ErrorCode {
     TEAM_VOTE_ALREADY_EXIST(HttpStatus.BAD_REQUEST, "이미 투표하셨습니다."),
     INVALID_TEAM_VOTE(HttpStatus.BAD_REQUEST, "본인 팀에는 투표할 수 없습니다."),
 
-    // Member
+    // CANDIDATE
+    NOT_FOUND_CANDIDATE(HttpStatus.NOT_FOUND, "해당 id의 후보자는 존재하지 않습니다."),
+
+    // MEMBER
     NOT_FOUND_MEMBER(HttpStatus.NOT_FOUND, "해당 id의 사용자는 존재하지 않습니다.");
 
     private final HttpStatus status;

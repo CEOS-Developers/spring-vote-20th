@@ -7,6 +7,8 @@ import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import photoground.ceos.vote.domain.candidate.entity.Candidate;
+import photoground.ceos.vote.domain.candidate.service.CandidateService;
 import photoground.ceos.vote.domain.member.entity.Member;
 import photoground.ceos.vote.domain.member.entity.Part;
 import photoground.ceos.vote.domain.member.entity.Team;
@@ -33,12 +35,13 @@ public class VoteService {
 
     private final VoteRepository voteRepository;
     private final MemberService memberService;
+    private final CandidateService candidateService;
 
     // 파트장 후보 조회
     public LeaderListDTO showLeaders(Part part) {
 
-        List<Member> members = memberService.findByPart(part);
-        List<LeaderDTO> dtos = members.stream().map(LeaderDTO::from
+        List<Candidate> candidates = candidateService.findByPart(part);
+        List<LeaderDTO> dtos = candidates.stream().map(LeaderDTO::from
         ).toList();
         return LeaderListDTO.from(dtos);
     }
@@ -65,11 +68,11 @@ public class VoteService {
         Long leaderId = voteDTO.getLeaderId();
 
         //후보자 id 유효성 체크
-        if (!memberExist(leaderId)) {
+        if (!candidateExist(leaderId)) {
             throw new CustomException(ErrorCode.LEADER_NOT_EXIST);
         }
 
-        Member leader = memberService.findById(leaderId);
+        Candidate leader = candidateService.findById(leaderId);
         Member voter = memberService.findById(voterId);
 
         //파트 체크
@@ -112,7 +115,7 @@ public class VoteService {
     public LeaderResultListDTO getLeaderResult(Part part) {
 
         //파트가 part인 멤버들 찾아서 리스트에 담기
-        List<Member> candidates = memberService.findByPart(part);
+        List<Candidate> candidates = candidateService.findByPart(part);
 
         //voteNum 기준 내림차순 정렬
         List<LeaderResultDTO> resultList = candidates.stream()
@@ -150,12 +153,12 @@ public class VoteService {
     }
 
     //후보자 id 유효성 체크
-    private boolean memberExist(Long candidateId) {
-        return memberService.existsById(candidateId);
+    private boolean candidateExist(Long candidateId) {
+        return candidateService.existsById(candidateId);
     }
 
     //파트 체크
-    private boolean validPart(Member candidate, Member voter) {
+    private boolean validPart(Candidate candidate, Member voter) {
         Part candidatePart = candidate.getPart();
         Part myPart = voter.getPart();
 

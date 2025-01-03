@@ -2,7 +2,7 @@ package photoground.ceos.vote.domain.vote.dto;
 
 import lombok.Builder;
 import lombok.Getter;
-import photoground.ceos.vote.domain.member.entity.Member;
+import photoground.ceos.vote.domain.candidate.entity.Candidate;
 
 @Getter
 @Builder
@@ -13,12 +13,12 @@ public class LeaderResultDTO {
     private String teamName;
     private int voteNum;
 
-    public static LeaderResultDTO from(Member member) {
+    public static LeaderResultDTO from(Candidate candidate) {
         return LeaderResultDTO.builder()
-                .leaderName(member.getName())
-                .leaderId(member.getId())
-                .teamName(member.getTeam().getName())
-                .voteNum(member.getVoteNum())
+                .leaderName(candidate.getName())
+                .leaderId(candidate.getId())
+                .teamName(candidate.getTeam().getName())
+                .voteNum(candidate.getVoteNum())
                 .build();
     }
 
