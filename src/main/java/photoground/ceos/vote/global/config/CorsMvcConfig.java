@@ -11,6 +11,6 @@ public class CorsMvcConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry corsRegistry) {
         // 컨트롤러 경로에 대해 요청을 허용
         corsRegistry.addMapping("/**")
-                    .allowedOrigins("http://localhost:3000");
+                .allowedOrigins("http://localhost:3000", "https://react-vote-20th-l62s.vercel.app/");
     }
 }
