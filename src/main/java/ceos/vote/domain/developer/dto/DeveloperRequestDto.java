@@ -14,6 +14,10 @@ public record DeveloperRequestDto(
         @NotNull(message = "소속 팀명은 필수 입력 사항입니다.")
         String team,
 
+        @Schema(description = "자기소개", example = "안녕하세요~ 이건 자기 소개입니다.")
+        @NotNull(message = "자기소개는 필수 입력 사항입니다.")
+        String introduction,
+
         @Schema(description = "소속 파트", example = "backend | frontend")
         @NotNull(message = "소속 파트는 필수 입력 사항입니다.")
         String part
