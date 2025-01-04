@@ -42,6 +42,7 @@ public class DeveloperService {
                 .developerName(developerRequestDto.name())
                 .part(partType)
                 .team(team)
+                .introduction(developerRequestDto.introduction())
                 .build();
         developerRepository.save(developer);
     }
