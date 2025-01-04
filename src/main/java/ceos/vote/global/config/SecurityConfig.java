@@ -91,7 +91,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/login", "/", "/api/auth/**", "/swagger-ui.html", "/swagger-ui/**","/v3/api-docs/**").permitAll()
-                        .requestMatchers("/api/vote/developer", "/api/vote/team", "/api/team", "/api/developer").permitAll()  // 개발자, 팀 조회하는건 허용
+                        .requestMatchers("/api/vote/developer", "/api/vote/team", "/api/team", "/api/developer", "/api/developer/detail").permitAll()  // 개발자, 팀 조회하는건 허용
                         .anyRequest().authenticated()
                 );
 
