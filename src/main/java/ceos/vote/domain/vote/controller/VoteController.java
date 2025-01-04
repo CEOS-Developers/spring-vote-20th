@@ -1,10 +1,7 @@
 package ceos.vote.domain.vote.controller;
 
 import ceos.vote.domain.member.entity.Member;
-import ceos.vote.domain.vote.dto.response.DeveloperListResponseDto;
-import ceos.vote.domain.vote.dto.response.DeveloperVoteResultResponseDto;
-import ceos.vote.domain.vote.dto.response.TeamListResponseDto;
-import ceos.vote.domain.vote.dto.response.TeamVoteResultResponseDto;
+import ceos.vote.domain.vote.dto.response.*;
 import ceos.vote.domain.vote.service.VoteService;
 import ceos.vote.global.annotation.Login;
 import ceos.vote.global.common.response.CommonResponse;
@@ -23,6 +20,12 @@ public class VoteController {
 
     private final VoteService voteService;
 
+    @GetMapping("/developer/detail/{developerId}")
+    @Operation(summary = "개발자 자기소개 조회하는 API", description = "-")
+    public CommonResponse<DeveloperIntroductionResponseDto> getIntroduction(@PathVariable Long developerId) {
+
+        return new CommonResponse<>(voteService.getIntroduce(developerId), "개발자 자기소개 조회 완료");
+    }
 
     @GetMapping("/developer")
     @Operation(summary = "개발자 리스트 조회하는 API", description = "request param으로 type=backend 또는 type=frontend 를 넘겨주세요")

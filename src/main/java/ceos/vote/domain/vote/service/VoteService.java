@@ -4,10 +4,7 @@ import ceos.vote.domain.developer.entity.Developer;
 import ceos.vote.domain.member.entity.Member;
 import ceos.vote.domain.member.entity.PartType;
 import ceos.vote.domain.team.entity.Team;
-import ceos.vote.domain.vote.dto.response.DeveloperListResponseDto;
-import ceos.vote.domain.vote.dto.response.TeamListResponseDto;
-import ceos.vote.domain.vote.dto.response.DeveloperVoteResultResponseDto;
-import ceos.vote.domain.vote.dto.response.TeamVoteResultResponseDto;
+import ceos.vote.domain.vote.dto.response.*;
 import ceos.vote.global.exception.ApplicationException;
 import ceos.vote.global.repository.DeveloperRepository;
 import ceos.vote.global.repository.MemberRepository;
@@ -30,6 +27,18 @@ public class VoteService {
     private final TeamRepository teamRepository;
     private final MemberRepository memberRepository;
     private final DeveloperRepository developerRepository;
+
+    // [GET] 개발자 자기소개 조회
+    public DeveloperIntroductionResponseDto getIntroduce(Long developerId) {
+
+        Developer developer = developerRepository.findById(developerId)
+                .orElseThrow(() -> new ApplicationException(NOT_FOUND_USER));
+
+        return DeveloperIntroductionResponseDto.builder()
+                .name(developer.getDeveloperName())
+                .introduction(developer.getIntroduction())
+                .build();
+    }
 
     // [GET] 개발자 리스트 조회
     public List<DeveloperListResponseDto> getDeveloperList(String type) {
