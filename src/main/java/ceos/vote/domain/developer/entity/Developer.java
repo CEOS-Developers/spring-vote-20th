@@ -28,6 +28,8 @@ public class Developer {
     @JoinColumn(name = "team_id")
     private Team team;
 
+    private String introduction;
+
     private int count = 0;
 
     public void voteToMe() {
@@ -35,11 +37,12 @@ public class Developer {
     }
 
     @Builder
-    public Developer(String developerName, PartType part, Team team) {
+    public Developer(String developerName, PartType part, Team team, String introduction) {
 
         this.developerName = developerName;
         this.part = part;
         this.team = team;
+        this.introduction = introduction;
     }
 
 }
