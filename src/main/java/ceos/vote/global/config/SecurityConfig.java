@@ -61,9 +61,9 @@ public class SecurityConfig {
                         configuration.setAllowedOrigins(Arrays.asList(
                                 "http://localhost:3000",
                                 "http://localhost:8080",
-                                "http://localhost:8081"
-//                                "http://배포주소:8080",
-//                                "http://배포주소:8081"
+                                "http://3.35.91.98:8080",
+                                "https://3.35.91.98",
+                                "https://angelbridge-vote-rho.vercel.app"
                         ));
                         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 
