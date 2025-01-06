@@ -64,27 +64,34 @@ public enum Team {
 
 ### **1) 회원 가입**
 
-<img width="600" src="https://github.com/user-attachments/assets/7cfa1438-74b2-40ed-abae-7bfdf0002275" />
+**201 - 회원가입 성공**
+
+<img width="600" alt="스크린샷 2025-01-06 13 37 40" src="https://github.com/user-attachments/assets/0f97fbfe-0ba1-4213-9741-2148fb38d039" />
+
+**409 - 아이디 중복 가입 시도하는 경우**
+
+<img width="600" alt="스크린샷 2025-01-06 13 38 27" src="https://github.com/user-attachments/assets/09dc47cc-7cbc-46f1-b847-82cd4b610f8a" />
 
 ### **2) 로그인**
 
-<img width="600" src="https://github.com/user-attachments/assets/392b46d6-edd4-4009-bd18-490259e77cd0" />
+<img width="600" alt="스크린샷 2025-01-06 13 39 42" src="https://github.com/user-attachments/assets/295a36a8-5b60-47ff-82c2-4e9892ea1e25" />
 
 ### **3) 회원 프로필 조회**
 
-<img width="600" src="https://github.com/user-attachments/assets/0cc0fa32-a52a-4860-a945-684536515cec" />
+<img width="600" alt="스크린샷 2025-01-06 13 42 01" src="https://github.com/user-attachments/assets/314fa2ee-b54c-4073-9b66-92ccf55af71e" />
 
 ### **4) 후보 조회**
 
 **팀 조회**
 
-<img width="600" src="https://github.com/user-attachments/assets/b0ed6967-647c-446b-9693-550185681d71" />
+<img width="600" alt="스크린샷 2025-01-06 13 43 39" src="https://github.com/user-attachments/assets/8cb749ad-7c56-4713-a4a6-95a6714a52a3" />
 
 **파트별 조회**
 
-<img width="600" src="https://github.com/user-attachments/assets/f4d3b6a2-800a-45ea-8e15-b0d2451123fb" />
+<img width="600" alt="스크린샷 2025-01-06 13 44 09" src="https://github.com/user-attachments/assets/dc61dcd2-4776-44be-8562-1cc66bb8272e" />
 
-<img width="600" src="https://github.com/user-attachments/assets/d659f1ce-0ba9-4305-b930-072d4bbe8fe6" />
+<img width="600" alt="스크린샷 2025-01-06 13 44 28" src="https://github.com/user-attachments/assets/206207af-a031-4871-8f4d-3a277353d0dd" />
+
 
 ### **5) 투표 생성**
 
@@ -92,33 +99,46 @@ public enum Team {
 
 **201 - 생성 성공**
 
-<img width="600" src="https://github.com/user-attachments/assets/d2b33141-960d-4896-b115-d66b905c3e53" />
+<img width="600" alt="스크린샷 2025-01-06 13 45 50" src="https://github.com/user-attachments/assets/6af3baa3-4981-4f60-a093-3cf96848b47b" />
 
 **400 - 자신의 팀에 투표 시도**
 
-<img width="600"  src="https://github.com/user-attachments/assets/20576297-6897-455c-8545-09b3ef572fd2" />
+<img width="600" alt="스크린샷 2025-01-06 13 46 37" src="https://github.com/user-attachments/assets/4fa025bd-00d4-4fa2-8017-9bf27c8201cc" />
 
 
 **409 - 중복 투표 시도**
 
-<img width="600" src="https://github.com/user-attachments/assets/97ad797d-8f43-42f2-9c64-329c15187502" />
+<img width="600" alt="스크린샷 2025-01-06 13 47 05" src="https://github.com/user-attachments/assets/0d075c03-97e1-4328-b28d-c4e1f4a49f02" />
+
 
 **파트 리더 투표**
 
 **201 - 생성 성공**
 
-<img width="600" src="https://github.com/user-attachments/assets/c67ce97c-0fb3-4471-8c66-130fbd82b5d2" />
+<img width="600" alt="스크린샷 2025-01-06 13 49 00" src="https://github.com/user-attachments/assets/52b9c43c-0285-4cbd-9dd3-d78ff95d5612" />
 
 **400 - 다른 파트에 투표 시도**
 
-<img width="600" src="https://github.com/user-attachments/assets/4c2cdf3b-e0ca-4fbc-a4c6-f40fb7e2835c" />
+<img width="600" alt="스크린샷 2025-01-06 13 47 57" src="https://github.com/user-attachments/assets/b64ec8fd-6a30-44f9-ba92-20f21801439a" />
+
 
 **400 - 해당 파트에 속하지 않는 구성원에 투표 시도**
 
-<img width="600" src="https://github.com/user-attachments/assets/8e46b4e2-3a86-4fc5-bdec-092004b08511" />
+<img width="600" alt="스크린샷 2025-01-06 13 48 24" src="https://github.com/user-attachments/assets/282df89e-8dde-437c-9cf0-b136e9982630" />
 
 **409 - 중복 투표 시도**
 
-<img width="600" src="https://github.com/user-attachments/assets/fc71f145-ed0f-4278-82d3-1b70fe1b3d18" />
+<img width="600" alt="스크린샷 2025-01-06 13 49 18" src="https://github.com/user-attachments/assets/e8da61d2-8cb4-43f9-85db-2392f2f75310" />
+
+### 6) 투표 결과 조회
+**1. 팀 투표 결과 조회**
+
+<img width="600" alt="스크린샷 2025-01-06 13 50 57" src="https://github.com/user-attachments/assets/70218b0a-61f5-4bf0-b584-6e63a8ef5eb6" />
 
 
+**2. 파트 투표 결과 조회**
+
+<img width="600" alt="스크린샷 2025-01-06 13 51 21" src="https://github.com/user-attachments/assets/91ab2e6d-02ce-4248-81a0-e3023c5a20e1" />
+
+
+<img width="600" alt="스크린샷 2025-01-06 13 53 00" src="https://github.com/user-attachments/assets/1ec08c47-0b1b-465c-aea8-19aa3db3ed37" />
